@@ -1,15 +1,22 @@
-import React, { useEffect, useState } from "react";
-import { SafeAreaView, StatusBar, View } from "react-native";
-import { ThemeProvider } from "styled-components";
-import useTheme from "./components/theme";
-import useMainStyles from "./styles/main-styles";
-import { NavigationContainer } from "@react-navigation/native";
-import { createStackNavigator } from "@react-navigation/stack";
-import Notes from "./screens/Notes";
-import Auth from "./screens/Auth";
 import "@react-native-firebase/app";
-import auth from "@react-native-firebase/auth";
-import { GoogleSignin } from "@react-native-google-signin/google-signin";
+import React from "react";
+import {
+  useEffect,
+  useState,
+  SafeAreaView,
+  StatusBar,
+  View,
+  ThemeProvider,
+  useTheme,
+  useMainStyles,
+  NavigationContainer,
+  createStackNavigator,
+  Notes,
+  Auth,
+  auth,
+  GoogleSignin,
+  Account,
+} from "./imports";
 
 const App = () => {
   const [themeState, setTheme] = useTheme();
@@ -28,7 +35,6 @@ const App = () => {
         "734541309297-906u2va9bt6ncbbc87a7fc6sf7113739.apps.googleusercontent.com",
     });
     auth().onAuthStateChanged((user) => {
-      console.log(user, "ladies and gentlemen, we got'em");
       setUser(user);
     });
   }, []);
@@ -55,6 +61,9 @@ const App = () => {
                 <>
                   <Stack.Screen name="Notes">
                     {(props) => <Notes {...props} {...propsForScreens} />}
+                  </Stack.Screen>
+                  <Stack.Screen name="Account">
+                    {(props) => <Account {...props} {...propsForScreens} />}
                   </Stack.Screen>
                 </>
               ) : (
